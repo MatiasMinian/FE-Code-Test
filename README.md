@@ -16,9 +16,24 @@ Please clone the repository, complete the exercise, and submit a PR for us to re
 
 A) Describe the strategy used to consume the API endpoints and the data management.
 
+To make the requests to the API I've used the built in Fetch library. All API code related is placed in the `api` folder to separate it from business and app logic. 
+For state management I've just used both screen's state to handle it. For the simplicity of the app I've done it this way even though in a more complex app I would use something different like React Context or Redux depending on the size, features, requirements, etc.
+
 B) Explain which library was used for the routing and why. Would you use the same for a consumer facing app targeting thousands of users? Why?
 
+I chose React Navigation as the routing library. I feel comfortable with it, I've used it before and I think it's the best solution for routing right now.
+I would still use the same library for a big app. I've compared it before with some other libraries like react-native-navigation (Wix), native-navigation (Airbnb) and
+react-native-router-flux and the decision was the same. When I choose a library I pay attention mainly to 4 things: The community behind the library (contributors, 
+repo stars, npm downloads and how well known the library is); the state of the library (when were the last release and commit made); documentation; and 
+some opinions from others (blogs, posts, etc.). If performance is the main issue, I would take a look at react-native-navigation V2 but for now I would stick with
+react-navigation.
+
+
 C) Have you used any strategy to optimize the performance of the list generated for the first feature?
+
+I've used the newer and more performant `FlatList` instead of the old `ListView`. Also, to prevent re renders that are not necessary, I've made the `FlatList`
+item component a Pure Component and was careful not to pass arrow functions or binds in renders as this will provoke a new function to be created in each rendering.
+Finally, I've passed the drink id as key for each item instad of index, as adding, removing or re ordering elements would cause performance issues or bugs if index was to be used because React uses these keys to realize which elements have changed (Added, removed, re ordered)
 
 D) Would you like to add any further comments or observations?
 
